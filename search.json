@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "3 parameters causal model",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "immigration.html",
+    "href": "immigration.html",
+    "title": "Attitudes Toward Immigration",
+    "section": "",
+    "text": "[ _i = _0 + _1 _i ]\n[ _i = 3.25 + 1.47 _i ]\n\n\n\n\n\n\n\n\n\n`\nAttitudes toward immigration vary widely across different groups of people and can be influenced by various factors. Using survey data collected in 2024 from 1,000 adults by the National Social Survey, we examine how treatment influences individuals’ final attitudes toward immigration. However, our estimates may be biased if unmeasured factors influence both exposure to Spanish speakers and immigration attitudes, or if the sample is not fully representative of the broader population. We model attitudes toward immigration, measured on a numerical scale indicating support or opposition, as a linear function of treatment exposure to Spanish speakers and other relevant covariates. The estimated average causal effect of the treatment on attitudes toward immigration is 1.55, with a 95% confidence interval ranging from 0.53 to 2.57, indicating a statistically significant positive impact while acknowledging some uncertainty in the exact magnitude."
+  }
+]
