@@ -24,9 +24,29 @@ library(primer.data)
 library(tidymodels)
 library(gtsummary)
 library(marginaleffects) 
+fit_att <- linear_reg() %>%
+  fit(att_end ~ treatment, data = trains)
+
+comp_att <- avg_comparisons(fit_att, variables = "treatment")
+library(ggplot2)
 ```
 
 ```{r}
+library(tidyverse)
+
+comp_att %>% 
+  as_tibble() %>% 
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.1) +
+  labs(title = "Average Treatment Effect Estimate",
+       subtitle = "95% Confidence Interval",
+       x = "Term",
+       y = "Estimate")
+
+fit_att <- linear_reg() %>%
+  fit(att_end ~ treatment, data = trains)
+
 tbl_regression(fit_att)
 
 library(gtsummary)
@@ -43,4 +63,28 @@ fit_att %>%
   )
 ```
 
-Attitudes toward immigration vary widely across different groups of people and can be influenced by various factors. Using survey data collected in 2024 from 1,000 adults by the National Social Survey, we examine how treatment influences individuals' final attitudes toward immigration. However, our estimates may be biased if unmeasured factors influence both exposure to Spanish speakers and immigration attitudes, or if the sample is not fully representative of the broader population. We model attitudes toward immigration, measured on a numerical scale indicating support or opposition, as a linear function of treatment exposure to Spanish speakers and other relevant covariates.
+```{r}
+library(ggplot2)
+
+comp_att %>%
+  as_tibble() %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point(size = 4, color = "#2C7FB8") +
+  geom_errorbar(aes(ymin = `2.5 %`, ymax = `97.5 %`), width = 0.2, color = "#2C7FB8") +
+  ylim(0, NA) +
+  labs(
+    title = "Estimated Causal Effect of Treatment on Attitudes Toward Immigration",
+    subtitle = "With 95% Confidence Interval",
+    x = "Treatment Comparison",
+    y = "Estimated Effect",
+    caption = "Data source: Trains dataset"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 12),
+    axis.title = element_text(size = 12)
+  )
+```
+
+Attitudes toward immigration vary widely across different groups of people and can be influenced by various factors. Using survey data collected in 2024 from 1,000 adults by the National Social Survey, we examine how treatment influences individuals' final attitudes toward immigration. However, our estimates may be biased if unmeasured factors influence both exposure to Spanish speakers and immigration attitudes, or if the sample is not fully representative of the broader population. We model attitudes toward immigration, measured on a numerical scale indicating support or opposition, as a linear function of treatment exposure to Spanish speakers and other relevant covariates. The estimated average causal effect of the treatment on attitudes toward immigration is 1.55, with a 95% confidence interval ranging from 0.53 to 2.57, indicating a statistically significant positive impact while acknowledging some uncertainty in the exact magnitude.
