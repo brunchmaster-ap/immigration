@@ -5,10 +5,21 @@ execute:
   echo: false
 ---
 
+\[
+\text{att\_end}_i = \beta_0 + \beta_1 \times \text{treatment}_i
+\]
+
+```{r}
+#| cache: true
+```
+
 ```{r}
 #| message: false
 library(tidyverse)
 library(primer.data)
+library(tidymodels)
+library(gtsummary)
+library(marginaleffects) 
 ```
 
 Attitudes toward immigration vary widely across different groups of people and can be influenced by various factors. Using survey data collected in 2024 from 1,000 adults by the National Social Survey, we examine how treatment influences individuals' final attitudes toward immigration. However, our estimates may be biased if unmeasured factors influence both exposure to Spanish speakers and immigration attitudes, or if the sample is not fully representative of the broader population.
